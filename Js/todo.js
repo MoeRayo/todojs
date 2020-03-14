@@ -1,68 +1,88 @@
-
-//this function will add a new to do item to the list, it is being called when the add todo item button is clicked
-function addItem(){
-  
-
-  //check if the user has entered an item inside the box, if not, display an error message
-  
-
-
-let todoDescriptionValue = document.getElementById('todoDescription').value;
-  let todoItemValue = document.getElementById('todoItem').value;
-  // let counterValue = document.getElementById('counter'); //Get the value of the textbox with id, todoItem. Save the value inside variable called todoItemValue.
-  
-
-//Get the value of the textbox with id, todoItem. Save the value inside variable called todoItemValue.
-
- if(todoItemValue == ''){
-     //this means they have not entered anything, display error message
-     document.getElementById('message').innerHTML = "You need to enter a todo item"; // this is setting the error message to display
-      document.getElementById('message').style = 'display:block'; //this will make the hidden message box appear
-
- }else{
-
-  //We can now display the todo item
-
-  //don't forget to hide the error message
-  document.getElementById('message').style = 'display:none';
-  //get present list items:
-
-  let presentListItems = document.getElementById('todoList').innerHTML;
-
-  //append new todo item to that.
-
- let newListItems = presentListItems +'<li class="list-group-item display-7">' + "<h3>"+ todoItemValue + "</h3>"  + todoDescriptionValue + '   <button onclick="deleteItem(this)" class="text-danger" title="delete this todo"><span class="fa fa-trash"></span></button><button onclick="completeItem(this)" class="text-success" title="complete this todo"><span class="fa fa-check"></span></button><td>';
-
-  //display the new list
-
-  document.getElementById('todoList').innerHTML = newListItems;
-  
-  //clear the box
-  document.getElementById('todoItem').value='';
-  document.getElementById('todoDescription').value='';
-
- }
- 
-
-}
-
-//this function will delete a single todo item from the list. 
-//Takes in 1 parameter, the item to be deleted
-function deleteItem(item){
-  
-  item.parentElement.remove(); //this gets the parent element of the delete button (i.e the <li> holding that particular button clicked), and then remove it from display
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 
+        Installation of bootstrap and fontawesome
+    -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
-//this function will mark a single todo item as completed. 
-//Takes in 1 parameter, the item to be completed
-function completeItem(item){
-  //same as we did for delete, get the parent element, cross the content out to show that it has been completed
-  let presentContent = item.parentElement.innerHTML;
-  //add strike tag
-  let newContent = '<strike>' + presentContent + '</strike>';
-  //display the new content
-  item.parentElement.innerHTML = newContent;
-  
-}
 
+</head>
+<body>
+    <div class="container">
+        <div class="display-4">TODO LIST </div>
+            <div class="alert alert-danger col-6" id="message" style="display: none">
+
+            </div>
+            <div class="text-info col-6">
+                <input type="text" placeholder="Enter to do title here..." id="todoItem" class="form-control" /><br>
+                <textarea rows="5" class="form-control" id="todoDescription" placeholder="Your to do description here..."></textarea>
+                <label>
+                    Is this task urgent?
+                </label>
+                <input type="text" placeholder="Enter your response here..." id="todoResponse" class="form-control" /><br>
+                
+                
+                <!-- <p>Is this task urgent?<span id="choice-result"></span></p>
+                <div class="form-group">
+                    <div class="form-check">
+                            <input class="form-check-input" type="radio" id="yes-choice" name="choice" value="yes" checked> 
+                            <label class="form-check-label" for="yes-choice">
+                                Yes
+                            </label>
+                    </div>
+                    <div class="form-check">
+                            <input class="form-check-input" type="radio" id="no-choice" name="choice" value="no">
+                            <label class="form-check-label" for="no-choice">
+                                No
+                            </label>
+                    </div>
+                </div>
+             -->
+                <button onclick="addItem()" class="btn btn-sm btn-primary">
+                    <span class="fa fa-plus"></span> add new item
+                </button>
+            </div>
+            <!-- <div class="col-5 bg-primary rounded-left rounded-lg" >
+
+            </div> -->
+       <div class="row">
+                
+               
+                    <ol class="col-6 list-group list-group-flush" id="sidebar">
+                        <li class="list-group-item">Important items appear here...
+                            <button onclick="deleteItem(this)" class="text-danger" title="delete this todo">
+                                <span class="fa fa-trash"></span>
+                             </button> 
+                            <button onclick="completeItem(this)" class="text-success" title="complete this todo">
+                                <span class="fa fa-check"></span>
+                            </button>
+                        </li>
+                    </ol>
+                    <ul class="col-6 list-group list-group-flush" id="todoList">
+                        <!-- I left this here to show the template before it was moved to the js function -->
+                            <li class="list-group-item">Less important items appear here...
+                                <button onclick="deleteItem(this)" class="text-danger" title="delete this todo">
+                                    <span class="fa fa-trash"></span>
+                                 </button> 
+                                <button onclick="completeItem(this)" class="text-success" title="complete this todo">
+                                    <span class="fa fa-check"></span>
+                                </button>
+                            </li>
+                        </ul> 
+    
+               
+              
+       </div>
+        
+    </div>
+    <!--linking to external javascript-->
+    <script src="js/todo.js"></script>
+</body>
+</html>
