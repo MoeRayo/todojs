@@ -1,10 +1,18 @@
 
 //this function will add a new to do item to the list, it is being called when the add todo item button is clicked
 function addItem(){
+  
 
   //check if the user has entered an item inside the box, if not, display an error message
+  
 
- let todoItemValue = document.getElementById('todoItem').value; //Get the value of the textbox with id, todoItem. Save the value inside variable called todoItemValue.
+
+let todoDescriptionValue = document.getElementById('todoDescription').value;
+  let todoItemValue = document.getElementById('todoItem').value;
+  // let counterValue = document.getElementById('counter'); //Get the value of the textbox with id, todoItem. Save the value inside variable called todoItemValue.
+  
+
+//Get the value of the textbox with id, todoItem. Save the value inside variable called todoItemValue.
 
  if(todoItemValue == ''){
      //this means they have not entered anything, display error message
@@ -23,7 +31,7 @@ function addItem(){
 
   //append new todo item to that.
 
- let newListItems = presentListItems +'<li class="list-group-item display-7">' + todoItemValue + '   <button onclick="deleteItem(this)" class="text-danger" title="delete this todo"><span class="fa fa-trash"></span></button><button onclick="completeItem(this)" class="text-success" title="complete this todo"><span class="fa fa-check"></span></button></li>';
+ let newListItems = presentListItems +'<li class="list-group-item display-7">' + "<h3>"+ todoItemValue + "</h3>"  + todoDescriptionValue + '   <button onclick="deleteItem(this)" class="text-danger" title="delete this todo"><span class="fa fa-trash"></span></button><button onclick="completeItem(this)" class="text-success" title="complete this todo"><span class="fa fa-check"></span></button><td>';
 
   //display the new list
 
@@ -31,6 +39,8 @@ function addItem(){
   
   //clear the box
   document.getElementById('todoItem').value='';
+  document.getElementById('todoDescription').value='';
+
  }
  
 
@@ -42,6 +52,7 @@ function deleteItem(item){
   
   item.parentElement.remove(); //this gets the parent element of the delete button (i.e the <li> holding that particular button clicked), and then remove it from display
 }
+
 
 //this function will mark a single todo item as completed. 
 //Takes in 1 parameter, the item to be completed
